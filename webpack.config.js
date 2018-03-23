@@ -1,21 +1,33 @@
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = {
-	entry: [
-		'react-hot-loader/patch',
-		'./src/index.js'
-	],
+	entry: './src/index.js',
 	module: {
 		rules: [
 			{
 				test: /\.(js|jsx)$/,
 				exclude: /node_modules/,
 				use: ['babel-loader']
-			}
+			},
+			{
+				test: /\.sass$/,
+				use: ExtractTextPlugin.extract({
+					fallback: 'style-loader',
+					use: [
+						{ 
+							loader: 'css-loader', 
+							options: { minimize: true }
+						},
+						'sass-loader'
+					]
+				})
+			},
 		]
 	},
 	resolve: {
-		extensions: ['*', '.js', '.jsx']
+		extensions: ['*', '.js', '.jsx', '.css', '.sass']
 	},
 	output: {
 		path: __dirname + '/dist',
@@ -23,11 +35,14 @@ module.exports = {
 		filename: 'bundle.js'
 	},
 	plugins: [
-    	new webpack.HotModuleReplacementPlugin()
+		new ExtractTextPlugin('style.css'),
+		new UglifyJSPlugin(),
 	],
 	devServer: {
 		historyApiFallback: true,
 		contentBase: './dist',
-		hot: true
 	}
 };
+
+
+

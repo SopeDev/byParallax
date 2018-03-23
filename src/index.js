@@ -6,6 +6,8 @@ import Layout from './views/Layout'
 import About from './views/About'
 import Projects from './views/Projects'
 
+import './index.sass'
+
 const app = document.getElementById('app')
 
 ReactDOM.render(
@@ -17,5 +19,3 @@ ReactDOM.render(
 		</Switch>
 	</Router>,
 app);
-
-module.hot.accept();

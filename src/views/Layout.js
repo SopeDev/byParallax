@@ -1,9 +1,14 @@
 import React from 'react'
 
+import Nav from '../components/nav/nav'
+
 export default class Layout extends React.Component {
 	render() {
 		return (
-			<div>This is a Layout</div>
+			<div>
+				<Nav />
+				{this.props.children}
+			</div>
 		)
 	}
 }

@@ -1,0 +1,28 @@
+@import 'mixins'
+
+.projects
+	position: relative
+	display: flex
+	width: 80vw
+	min-height: 100vh
+	margin: auto
+	padding: 10vh 0
+	align-items: center
+	.tile-board
+		position: relative
+		display: flex
+		flex-flow: row wrap
+		align-content: center
+		.tile
+			@include for-phone-only
+				width: 80vw
+				height: 80vw
+			@include for-tablet-portrait-up
+				width: 40vw
+				height: 40vw
+			@include for-desktop-up
+				width: 20vw
+				height: 20vw
+			background-size: cover
+			background-position: center
+			background-repeat: no-repeat

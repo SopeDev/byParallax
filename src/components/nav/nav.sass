@@ -1,38 +1,45 @@
-.nav-bar
-	.toggle
+.navigation
+	z-index: 1
+	.nav-bar
+		position: absolute
+		width: 100vw
+		z-index: 2
+		.toggle
+			position: absolute
+			display: flex
+			top: 2em
+			left: 2em
+			width: 30px
+			height: 21px
+			justify-content: space-between
+			flex-direction: column
+			.pattie
+				width: 22px
+				height: 5px
+				background: #000
+		.logo
+			position: absolute
+			top: 2em
+			right: 2em
+
+	.nav-panel
 		position: absolute
 		display: flex
-		top: 2em
-		left: 2em
-		width: 30px
-		height: 21px
-		justify-content: space-between
-		flex-direction: column
-		z-index: 1
-		.pattie
-			width: 22px
-			height: 5px
-			background: #000
-	.logo
-		position: absolute
-		top: 2em
-		right: 2em
-
-.nav-panel
-	position: absolute
-	display: flex
-	width: 100vw
-	height: 100vh
-	align-items: center
-	justify-content: center
-	&.collapsed
-		width: 0
-		height: 0
+		align-items: center
+		justify-content: center
+		background: #ccc
 		overflow: hidden
-	ul
-		margin: 0
-		padding: 0
-		li
-			list-style: none
+		z-index: 1
+		ul
+			margin: 0
+			padding: 0
+			li
+				position: relative
+				display: block
+				overflow: hidden
+				list-style: none
+				span
+					position: relative
+					display: inline-block
 
 

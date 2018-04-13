@@ -49,21 +49,24 @@ export default class Nav extends React.Component {
 	}
 
 	render() {
-
 		const { open, shown } = this.state
+		const { location } = this.props
 
+		const navInvertClass = location == "/" ? "" : "invert"
 		const navPanelClass = open ? "collapsed" : ""; 
 
 		return (
 			<div className="navigation">
-				<div className="nav-bar">
+				<div className={"nav-bar " + navInvertClass}>
 					<div className="toggle" onClick={ this._handleMenu }>
 						<span className="pattie"></span>
 						<span className="pattie"></span>
 						<span className="pattie"></span>
 					</div>
 					<div className="logo">
-						<Link to="/" onClick={() => this._handleMenu("home")}>Parallax</Link>
+						<Link to="/" onClick={() => this._handleMenu("home")}>
+							<img src="./images/logo-white.png" alt="Parallax Creative"/>
+						</Link>
 					</div>
 				</div>
 
@@ -71,7 +74,7 @@ export default class Nav extends React.Component {
 					style={{x: spring(open ? 100 : 0, {stiffness: 250, damping: 28})}}
 				>
 					{({x}) => 
-						<div className={ "nav-panel " + navPanelClass } style={{
+						<div className={"nav-panel " + navPanelClass} style={{
 							width: `${x}vw`,
 							height: `${x}vh`,
 						}}>

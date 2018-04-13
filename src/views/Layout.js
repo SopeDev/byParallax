@@ -1,6 +1,6 @@
 import React from 'react'
-import { inject, observer } from 'mobx-react'
 import { withRouter } from 'react-router-dom'
+import { inject, observer } from 'mobx-react'
 
 import Nav from '../components/nav/nav'
 
@@ -33,14 +33,17 @@ export default withRouter(
 			const { NavStore } = this.props
 
 			if (NavStore.routing == false) {
-				if (NavStore.totalScroll > 100 && NavStore.nextRoute) {
+				NavStore.handleScroll(e)
+				if (NavStore.totalScroll == 100 && NavStore.nextRoute) {
 					NavStore.enableRouting()
-					this.props.history.push(NavStore.nextRoute)
-				} else if (NavStore.totalScroll < -100 && NavStore.prevRoute) {
+					setTimeout(()=>{
+						this.props.history.push(NavStore.nextRoute)
+					}, 250)
+				} else if (NavStore.totalScroll == -100 && NavStore.prevRoute) {
 					NavStore.enableRouting()
-					this.props.history.push(NavStore.prevRoute)
-				} else {
-					NavStore.handleScroll(e)
+					setTimeout(()=>{
+						this.props.history.push(NavStore.prevRoute)
+					}, 250)
 				}
 			}
 		}
@@ -52,6 +55,10 @@ export default withRouter(
 					{this.props.children}
 				</div>
 			)
+		}
+
+		componentDidMount() {
+			this.props.NavStore.initLoad = true
 		}
 	}
 )

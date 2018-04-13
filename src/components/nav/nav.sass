@@ -1,27 +1,50 @@
 .navigation
-	z-index: 1
+	z-index: 1000
 	.nav-bar
 		position: absolute
 		width: 100vw
-		z-index: 2
+		z-index: 1002
 		.toggle
 			position: absolute
 			display: flex
+			width: 30px
+			height: 26px
 			top: 2em
 			left: 2em
-			width: 30px
-			height: 21px
 			justify-content: space-between
 			flex-direction: column
 			.pattie
-				width: 22px
-				height: 5px
-				background: #000
+				position: absolute
+				height: 4px
+				left: 2px
+				background-color: #fff
+				transition: background-color 500ms ease-in-out
+				&:nth-of-type(1)
+					width: 26px
+					top: 2px
+				&:nth-of-type(2)
+					width: 20px
+					top: 11px
+				&:nth-of-type(3)
+					width: 14px
+					top: 20px
+
 		.logo
 			position: absolute
 			top: 2em
 			right: 2em
-
+			width: 250px
+			img
+				width: 100%
+				filter: invert(0%)
+				transition: filter 500ms ease-in-out
+		&.invert
+			.toggle
+				.pattie
+					background-color: #000
+			.logo
+				img
+					filter: invert(100%)
 	.nav-panel
 		position: absolute
 		display: flex
@@ -29,7 +52,7 @@
 		justify-content: center
 		background: #ccc
 		overflow: hidden
-		z-index: 1
+		z-index: 1001
 		ul
 			margin: 0
 			padding: 0

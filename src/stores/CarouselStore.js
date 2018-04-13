@@ -8,11 +8,23 @@ class CarouselStore {
 	@observable slides = [{
 		header: "This is slide 1 HEADER",
 		text: "This is slide 1 text",
-		background: "./images/slide1.jpg"
+		background: "./images/slides/slide1.jpg"
 	}, {
 		header: "This is slide 2 HEADER",
 		text: "This is slide 2 text",
-		background: "./images/slide2.jpg"
+		background: "./images/slides/slide2.jpg"
+	}, {
+		header: "This is slide 3 HEADER",
+		text: "This is slide 3 text",
+		background: "./images/slides/slide3.jpg"
+	}, {
+		header: "This is slide 4 HEADER",
+		text: "This is slide 4 text",
+		background: "./images/slides/slide4.jpg"
+	}, {
+		header: "This is slide 5 HEADER",
+		text: "This is slide 5 text",
+		background: "./images/slides/slide5.jpg"
 	}]
 
 	enableCarousel() {
@@ -28,7 +40,7 @@ class CarouselStore {
 			this.stopped = false;
 			this.interval = setInterval(()=>{
 				this.currentSlide = this.currentSlide < this.slides.length - 1 ? this.currentSlide + 1 : 0
-			}, 3000)			
+			}, 6000)			
 		}
 	}
 

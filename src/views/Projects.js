@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { StaggeredMotion, spring } from 'react-motion'
 import { inject, observer } from 'mobx-react'
 
 import './styles/projects.sass'
@@ -11,32 +12,71 @@ export default class Projects extends React.Component {
 
 		return (
 			<div className="projects">
-				<div className="tile-board">
-					<div className="tile" style={{backgroundImage: `url('./images/project_thumbnail_1.jpg')`}}>
-						<Link to="/"></Link>
-					</div>
-					<div className="tile" style={{backgroundImage: `url('./images/project_thumbnail_1.jpg')`}}>
-						<Link to="/"></Link>
-					</div>
-					<div className="tile" style={{backgroundImage: `url('./images/project_thumbnail_1.jpg')`}}>
-						<Link to="/"></Link>
-					</div>
-					<div className="tile" style={{backgroundImage: `url('./images/project_thumbnail_1.jpg')`}}>
-						<Link to="/"></Link>
-					</div>
-					<div className="tile" style={{backgroundImage: `url('./images/project_thumbnail_1.jpg')`}}>
-						<Link to="/"></Link>
-					</div>
-					<div className="tile" style={{backgroundImage: `url('./images/project_thumbnail_1.jpg')`}}>
-						<Link to="/"></Link>
-					</div>
-					<div className="tile" style={{backgroundImage: `url('./images/project_thumbnail_1.jpg')`}}>
-						<Link to="/"></Link>
-					</div>
-					<div className="tile" style={{backgroundImage: `url('./images/project_thumbnail_1.jpg')`}}>
-						<Link to="/"></Link>
-					</div>
-				</div>
+				<StaggeredMotion
+					defaultStyles={[
+						{ scale: 0 },
+						{ scale: 0 },
+						{ scale: 0 }
+					]}
+					styles={(prevStyles) => [
+						{ scale: spring(1, {stiffness: 80, damping: 20}) },
+						{ scale: spring(prevStyles[0].scale, {stiffness: 80, damping: 20}) },
+						{ scale: spring(prevStyles[1].scale, {stiffness: 80, damping: 20}) }
+					]}
+				>
+					{(styles) =>
+						<div className="tile-board">
+							<div className="tile" style={{
+								transform: `scale(${styles[1].scale})`,
+								backgroundImage: `url('./images/projects/ios/thumbnail.jpg')`
+							}}>
+								<Link to="/"></Link>
+							</div>
+							<div className="tile" style={{
+								transform: `scale(${styles[2].scale})`,
+								backgroundImage: `url('./images/projects/yha/thumbnail.jpg')`
+							}}>
+								<Link to="/"></Link>
+							</div>
+							<div className="tile" style={{
+								transform: `scale(${styles[1].scale})`,
+								backgroundImage: `url('./images/projects/moblum/thumbnail.jpg')`
+							}}>
+								<Link to="/"></Link>
+							</div>
+							<div className="tile" style={{
+								transform: `scale(${styles[2].scale})`,
+								backgroundImage: `url('./images/projects/julian/thumbnail.jpg')`
+							}}>
+								<Link to="/"></Link>
+							</div>
+							<div className="tile" style={{
+								transform: `scale(${styles[2].scale})`,
+								backgroundImage: `url('./images/projects/s55/thumbnail.jpg')`
+							}}>
+								<Link to="/"></Link>
+							</div>
+							<div className="tile" style={{
+								transform: `scale(${styles[1].scale})`,
+								backgroundImage: `url('./images/projects/food/thumbnail.jpg')`
+							}}>
+								<Link to="/"></Link>
+							</div>
+							<div className="tile" style={{
+								transform: `scale(${styles[2].scale})`,
+								backgroundImage: `url('./images/projects/corp/thumbnail.jpg')`
+							}}>
+								<Link to="/"></Link>
+							</div>
+							<div className="tile" style={{
+								transform: `scale(${styles[1].scale})`,
+								backgroundImage: `url('./images/projects/provita/thumbnail.jpg')`
+							}}>
+								<Link to="/"></Link>
+							</div>
+						</div>
+					}
+				</StaggeredMotion>
 			</div>
 		)
 	}

@@ -8,13 +8,15 @@ import Contact from './views/Contact'
 import Home from './views/Home'
 import Layout from './views/Layout'
 import Projects from './views/Projects'
+import Project from './views/Project'
 
 import CarouselStore from './stores/CarouselStore'
 import NavStore from './stores/NavStore'
+import ProjectsStore from './stores/ProjectsStore'
 
 import './index.sass'
 
-const stores = { CarouselStore, NavStore }
+const stores = { CarouselStore, NavStore, ProjectsStore }
 const app = document.getElementById('app')
 
 ReactDOM.render(
@@ -30,8 +32,9 @@ ReactDOM.render(
 						>
 							<Switch location={location}>
 								<Route exact path='/' component={Home}/>
-								<Route exact path='/Proyectos' component={Projects}/>
-								<Route exact path='/Contacto' component={Contact}/>
+								<Route exact path='/proyectos' component={Projects}/>
+								<Route exact path="/proyectos/:projectId" component={Project} />
+								<Route exact path='/contacto' component={Contact}/>
 							</Switch>					
 						</CSSTransition>
 					</TransitionGroup>

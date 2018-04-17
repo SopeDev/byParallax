@@ -1,0 +1,23 @@
+.dotMenu
+	position: absolute
+	display: table
+	width: 10px
+	height: 100vh
+	top: 0
+	right: 1em
+	z-index: 1000
+	.dotContainer
+		display: table-cell
+		vertical-align: middle
+	.dot
+		width: 10px
+		height: 10px
+		margin: 10px 0
+		background-color: #888
+		border-radius: 100%
+		transition: background-color 250ms ease-in-out
+		cursor: pointer
+		&.active
+			background-color: #fff
+			&.invert
+				background-color: #000

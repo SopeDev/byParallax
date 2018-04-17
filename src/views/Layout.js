@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom'
 import { inject, observer } from 'mobx-react'
 
 import Nav from '../components/nav/nav'
+import DotMenu from '../components/dotMenu/dotMenu'
 
 import './styles/layout.sass'
 
@@ -16,6 +17,7 @@ export default withRouter(
 			}
 			this._disableRouting = this._disableRouting.bind(this)
 			this._handleScroll = this._handleScroll.bind(this)
+			this._manageDotNavigation = this._manageDotNavigation.bind(this)
 			this.routingTimeout
 		}
 
@@ -48,10 +50,31 @@ export default withRouter(
 			}
 		}
 
+		_manageDotNavigation(targetLocation) {
+			if (this.props.location.pathname == "/" && targetLocation != "/") {
+				this.props.NavStore.totalScroll = 99.9
+			}
+			if (this.props.location.pathname != targetLocation) {
+				setTimeout(()=>{
+					this.props.history.push(targetLocation)
+					this.props.NavStore.totalScroll = 0
+				}, 250)
+			}
+		}
+
 		render() {
+
+			console.log("layout is rendering")
+
 			return (
 				<div className="layout" onWheel={ this._handleScroll } onScroll={ this._disableRouting }>
 					<Nav location={this.props.location.pathname}/>
+					<DotMenu
+						location={this.props.location.pathname}
+						routes={['/','/proyectos','/contacto']}
+						invertLocation="/proyectos"
+						manageDotNavigation={ this._manageDotNavigation }
+					/>
 					{this.props.children}
 				</div>
 			)

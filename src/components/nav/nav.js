@@ -4,6 +4,8 @@ import { Motion, StaggeredMotion, spring } from 'react-motion'
 
 import CarouselStore from '../../stores/CarouselStore'
 
+import logo from '../../images/logo-white.png'
+
 import './nav.sass'
 
 export default class Nav extends React.Component {
@@ -58,14 +60,14 @@ export default class Nav extends React.Component {
 		return (
 			<div className="navigation">
 				<div className={"nav-bar " + navInvertClass}>
-					<div className="toggle" onClick={ this._handleMenu }>
+					<div className={"toggle " + navPanelClass} onClick={ this._handleMenu }>
 						<span className="pattie"></span>
 						<span className="pattie"></span>
 						<span className="pattie"></span>
 					</div>
 					<div className="logo">
 						<Link to="/" onClick={() => this._handleMenu("home")}>
-							<img src="./images/logo-white.png" alt="Parallax Creative"/>
+							<img src={logo} alt="Parallax Creative"/>
 						</Link>
 					</div>
 				</div>

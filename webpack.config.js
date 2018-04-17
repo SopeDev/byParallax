@@ -24,6 +24,37 @@ module.exports = {
 					]
 				})
 			},
+			{
+				test: /\.(jpg|png|ico)$/,
+				use: [
+					{
+						loader: 'url-loader',
+						options: {
+							limit: 10000,
+							name: 'images/[hash]-[name].[ext]'
+						}
+					},
+					{
+						loader: 'image-webpack-loader',
+						options: {
+							bypassOnDebug: true,
+							mozjpeg: {
+								progressive: true,
+								quality: 65
+							},
+						}						
+					},
+				]
+				// use: [
+				// 	{
+				// 		loader: 'url-loader',
+				// 		options: {
+				// 			limit: 10000,
+				// 			name: 'images/[hash]-[name].[ext]'
+				// 		},
+				// 	},
+				// ]
+			},
 		]
 	},
 	resolve: {

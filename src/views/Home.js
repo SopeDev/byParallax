@@ -18,8 +18,6 @@ export default class Home extends React.Component {
 			frameWidthAndHeight: NavStore.totalScroll / 10 > 0 ? NavStore.totalScroll / 10 : 0
 		}
 
-		console.log("home is rendering")
-
 		return (
 			<Motion
 				defaultStyle={{
@@ -49,7 +47,7 @@ export default class Home extends React.Component {
 		)
 	}
 
-	componentDidMount() {
+	componentWillMount() {
 		this.props.NavStore.prevRoute = null
 		this.props.NavStore.nextRoute = "/proyectos"
 		setTimeout(()=>{
@@ -57,9 +55,3 @@ export default class Home extends React.Component {
 		}, 1000)
 	}
 }
-						// <div className="canvas">
-						// 	<div className="top" style={{ height: `${style.canvasWidth}vh` }}></div>
-						// 	<div className="bottom" style={{ height: `${style.canvasWidth}vh` }}></div>
-						// 	<div className="left" style={{ width: `${style.canvasWidth}vw` }}></div>
-						// 	<div className="right" style={{ width: `${style.canvasWidth}vw` }}></div>
-						// </div>

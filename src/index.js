@@ -28,14 +28,14 @@ ReactDOM.render(
 						<CSSTransition
 							key={location.pathname}
 							classNames='fade'
-							timeout={500}
+							timeout={1000}
 						>
 							<Switch location={location}>
 								<Route exact path='/' component={Home}/>
-								<Route exact path='/proyectos' component={Projects}/>
-								<Route exact path="/proyectos/:projectId" component={Project} />
+								<Route exact path='/proyectos' component={Projects}></Route>
 								<Route exact path='/contacto' component={Contact}/>
-							</Switch>					
+								<Route exact path='/:projectId' component={Project} />
+							</Switch>
 						</CSSTransition>
 					</TransitionGroup>
 				</Layout>

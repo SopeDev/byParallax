@@ -1,21 +1,11 @@
 import React from 'react'
 import { inject, observer } from 'mobx-react'
-import { Motion, spring, TransitionMotion } from 'react-motion'
-
-import Slide from './slide'
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
 import './carousel.sass'
 
 @inject('CarouselStore') @observer
 export default class Carousel extends React.Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-			currentSlide: props.CarouselStore.currentSlide,
-			next: props.CarouselStore.nextSlide
-		}
-	}
-
 	componentWillMount() {
 		const { CarouselStore } = this.props
 
@@ -24,21 +14,10 @@ export default class Carousel extends React.Component {
 	}
 
 	render() {
-		const { currentSlide, nextSlide, slides } = this.props.CarouselStore
+		const { currentSlide, slides, stopped } = this.props.CarouselStore
 		const { scale, opacity } = this.props.style
 
-		const carrouselSlides = slides.map((slide) => {
-			const activeSlideClass = slide.key == currentSlide ? " active" : ""
-
-			return <div key={slide.key} className={"slide-background" + activeSlideClass} style={{ backgroundImage: `url('${slide.background}')` }}></div>
-		})
-
-		let textAnimationClass = " entering"
-		setTimeout(()=>{
-			textAnimationClass = " leaving"
-		})
-
-		console.log("carousel is rendering")
+		const loadingBarClass = stopped ? "stopped" : "active"
 
 		return (
 			<div className="carousel" style={{
@@ -46,48 +25,39 @@ export default class Carousel extends React.Component {
 				opacity: `${opacity}`
 			}}>
 				<div className="slider">
-					<div className="background-container">
-						{ carrouselSlides }
-					</div>
-
-					<TransitionMotion
-						willEnter={() => ({width: 100, left: 0})} // triggered by key3
-						willLeave={() => ({width: spring(100), left: 0})} // triggered by key2
-						// defaultStyles={[
-						// 	{key: 'slide' + currentSlide, data: { slide: currentSlide }, style: {width: 0, left: 0}}
-						// ]}
-						styles={[
-							{key: 'slide' + currentSlide, data: { slide: currentSlide }, style: {width: spring(0), left: spring(100)}}
-						]}
-					>
-						{ values =>
-							<div>
-								{values.map(({key, data, style}) =>
-									<div key={key} className={"header-container " + key}>
-										<div className="header-overlay" style={{width: `${style.width}%`, left: `${style.left}%`}}></div>
-										<h1 className="slide-header">{slides[data.slide].header}</h1>
-									</div>
-								)}
+					<TransitionGroup>
+						<CSSTransition
+							key={"slide-background" + currentSlide}
+							classNames='slide-background'
+							timeout={750}
+						>
+							<div className="background-container">
+								<div className="slide-background" style={{ backgroundImage: `url('${slides[currentSlide].background}')` }}></div>
 							</div>
-						}
-					</TransitionMotion>
-
-					<div className="text-container">
-						<div className={"text-overlay" + textAnimationClass}></div>
-						<p className="slide-text">{slides[currentSlide].text}</p>
-					</div>
+						</CSSTransition>
+					</TransitionGroup>
+					<TransitionGroup>
+						<CSSTransition
+							key={"slide" + currentSlide}
+							classNames='slide'
+							timeout={1000}
+						>
+							<div className={"slide-info slide" + currentSlide}>
+								<div className="header-container">
+									<div className="header-overlay"></div>
+									<h1 className="slide-header">
+										{slides[currentSlide].spanBefore ? <span>{slides[currentSlide].spanBefore}</span> : null}
+										{slides[currentSlide].header}
+										{slides[currentSlide].spanAfter ? <span>{slides[currentSlide].spanAfter}</span> : null}
+									</h1>
+								</div>
+							</div>
+						</CSSTransition>
+					</TransitionGroup>
+					<div key={"slide" + currentSlide + "loadingBar" + loadingBarClass} className={"slide-loader " + loadingBarClass}></div>
 				</div>
 			</div>
 		)
-	}
-
-	componentDidUpdate(prevProps) {
-		if (prevProps.CarouselStore.currentSlide != this.state.currentSlide) {
-			this.setState({
-				currentSlide: prevProps.CarouselStore.currentSlide,
-				nextSlide: prevProps.CarouselStore.currentSlide
-			})
-		}
 	}
 
 	componentWillUnmount() {

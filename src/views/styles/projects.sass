@@ -1,20 +1,67 @@
 @import 'mixins'
 
+@keyframes in-top
+  from
+  	transform: translateY(-100%)
+  to
+  	transform: translateY(0%)
+@keyframes in-right
+  from
+  	transform: translateX(100%)
+  to
+  	transform: translateX(0%)
+@keyframes in-bottom
+  from
+  	transform: translateY(100%)
+  to
+  	transform: translateY(0%)
+@keyframes in-left
+  from
+  	transform: translateX(-100%)
+  to
+  	transform: translateX(0%)
+
+@keyframes out-top
+  from
+  	transform: translateY(0%)
+  to
+  	transform: translateY(-100%)
+@keyframes out-right
+  from
+  	transform: translateX(0%)
+  to
+  	transform: translateX(100%)
+@keyframes out-bottom
+  from
+  	transform: translateY(0%)
+  to
+  	transform: translateY(100%)
+@keyframes out-left
+  from
+  	transform: translateX(0%)
+  to
+  	transform: translateX(-100%)
+
 .projects
 	position: relative
 	display: flex
-	width: 80vw
+	width: 100vw
 	min-height: 100vh
-	margin: auto
-	padding: 10vh 0
+	padding: 10vh 10vw
 	align-items: center
 	z-index: 250
+	.transitionElement
+		position: fixed
+		background-size: cover
+		background-position: center
+		background-repeat: no-repeat
 	.tile-board
 		position: relative
 		display: flex
 		flex-flow: row wrap
 		align-content: center
 		.tile
+			position: relative
 			@include for-phone-only
 				width: 80vw
 				height: 80vw
@@ -27,3 +74,56 @@
 			background-size: cover
 			background-position: center
 			background-repeat: no-repeat
+			overflow: hidden
+			.tile-info
+				position: absolute
+				display: flex
+				width: 100%
+				height: 100%
+				padding: 10%
+				align-items: center
+				justify-content: center
+				pointer-events: none
+				animation-duration: 250ms
+				animation-timing-function: ease
+				animation-fill-mode: forwards
+				transform: translateY(-100%)
+				transition: opacity 250ms ease
+				opacity: 1
+				.tile-title
+					color: #fff
+					font-family: 'GilroyMedium'
+					font-size: 1.2rem
+					letter-spacing: .4rem
+					text-align: center
+					text-transform: uppercase
+				.tile-subtitle
+					color: #333
+					font-size: 14px
+			&.in-top
+				.tile-info
+					animation-name: in-top
+			&.in-right
+				.tile-info
+					animation-name: in-right
+			&.in-bottom
+				.tile-info
+					animation-name: in-bottom
+			&.in-left
+				.tile-info
+					animation-name: in-left
+			&.out-top
+				.tile-info
+					animation-name: out-top
+			&.out-right
+				.tile-info
+					animation-name: out-right
+			&.out-bottom
+				.tile-info
+					animation-name: out-bottom
+			&.out-left
+				.tile-info
+					animation-name: out-left
+			&.clicked
+				.tile-info
+					opacity: 0

@@ -21,7 +21,7 @@ class NavStore {
 		clearTimeout(this.resetTotalScroll)
 		this.resetTotalScroll = setTimeout(()=>{
 			this.totalScroll = 0
-		}, 300)
+		}, 500)
 	}
 
 	enableRouting() {

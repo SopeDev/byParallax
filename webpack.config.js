@@ -1,5 +1,5 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const MinifyPlugin = require("babel-minify-webpack-plugin");
 const webpack = require('webpack');
 
 module.exports = {
@@ -25,6 +25,16 @@ module.exports = {
 				})
 			},
 			{
+                test: /\.(ttf|woff|woff2)$/,
+                use: {
+					loader: "url-loader",
+					options: {
+						limit: 50000,
+						name: "fonts/[name].[ext]",
+					},
+				},
+            },
+			{
 				test: /\.(jpg|png|ico)$/,
 				use: [
 					{
@@ -45,15 +55,17 @@ module.exports = {
 						}						
 					},
 				]
-				// use: [
-				// 	{
-				// 		loader: 'url-loader',
-				// 		options: {
-				// 			limit: 10000,
-				// 			name: 'images/[hash]-[name].[ext]'
-				// 		},
-				// 	},
-				// ]
+			},
+			{
+				test: /\.mp4$/,
+				use: [
+					{
+						loader: 'file-loader',
+						options: {
+							name: 'videos/[hash]-[name].[ext]'
+						}
+					}
+				]
 			},
 		]
 	},
@@ -63,12 +75,28 @@ module.exports = {
 	output: {
 		path: __dirname + '/dist',
 		publicPath: '/',
-		filename: 'bundle.js'
+		// chunkFilename: "[name].js",
+		filename: '[name].js'
 	},
 	plugins: [
 		new ExtractTextPlugin('style.css'),
-		new UglifyJSPlugin(),
+		new MinifyPlugin(),
 	],
+	// optimization: {
+ //        runtimeChunk: {
+ //            name: "manifest"
+ //        },
+ //        splitChunks: {
+ //            cacheGroups: {
+ //                vendor: {
+ //                    test: /[\\/]node_modules[\\/]/,
+ //                    name: "vendors",
+ //                    priority: -20,
+ //                    chunks: "all"
+ //                }
+ //            }
+ //        }
+ //   	},
 	devServer: {
 		historyApiFallback: true,
 		contentBase: './dist',

@@ -1,4 +1,13 @@
 .layout
 	width: 100vw
 	height: 100vh
-	overflow: auto
+	background-color: #fff
+	// overflow: auto
+	&.loader-enter
+		transform: translateX(100vw)
+	&.loader-enter.loader-enter-active
+		transform: translateX(0vw)
+		transition: transform 1000ms ease
+	.view-window
+		position: relative
+		min-height: 100vh

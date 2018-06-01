@@ -1,0 +1,60 @@
+@import '../../views/styles/mixins'
+
+@keyframes swipeable-down
+	0%
+		transform: translate3d(0, 0, 0)
+	10%
+		transform: translate3d(0, 10px, 0)
+	20%
+		transform: translate3d(0, 0, 0)
+	30%
+		transform: translate3d(0, 10px, 0)
+	40%
+		transform: translate3d(0, 0, 0)
+	100%
+		transform: translate3d(0, 0, 0)
+
+.dotMenu
+	position: absolute
+	display: table
+	width: 10px
+	height: 100%
+	top: 0
+	right: 1em
+	z-index: 1000
+	.dotContainer
+		display: table-cell
+		vertical-align: middle
+	.dot
+		width: 10px
+		height: 10px
+		margin: 10px 0
+		background-color: #888
+		border-radius: 100%
+		transition: background-color 250ms ease-in-out
+		cursor: pointer
+		&.active
+			background-color: #fff
+	.swipeable-down
+		&.show.first
+			animation-name: swipeable-down
+			animation-delay: 1000ms
+			animation-duration: 4000ms
+			animation-iteration-count: infinite
+	.swipeable-up, .swipeable-down
+		width: 10px
+		height: 25px
+		margin: 15px 0
+		filter: invert(0)
+		opacity: 0
+		transition: all 250ms ease
+		@include for-tablet-landscape-up
+			display: none
+		&.show
+			opacity: 1
+			margin: 30px 0
+	&.invert
+		.dot.active
+			background-color: #000
+		.swipeable-up, .swipeable-down
+			filter: invert(100%)

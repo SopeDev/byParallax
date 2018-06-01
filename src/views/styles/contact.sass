@@ -1,0 +1,243 @@
+@import 'mixins'
+
+@keyframes clap-bars
+	0%
+		width: 0%
+		transform: translate3d(0px, 0, 0)
+	50%
+		width: 100%
+		transform: translate3d(0px, 0, 0)
+	100%
+		width: 0%
+		transform: translate3d(50px, 0, 0)
+
+@keyframes clap
+	0%
+		transform: scale(1)
+	50%
+		transform: scale(.9)
+	100%
+		transform: scale(1)
+
+.contact
+	position: absolute
+	top: 0
+	width: 100vw
+	height: 100%
+	color: #fff
+	background-size: cover
+	background-position: center
+	background-repeat: no-repeat
+	.contact-info
+		position: absolute
+		bottom: 2em
+		width: 100%
+		padding: 0 2em
+		text-align: center
+		opacity: 0
+		transition: opacity 500ms ease
+		&.show
+			opacity: 1
+	&.fade-enter
+		transform: translate3d(0, 100vh, 0)
+		z-index: 100
+	&.fade-enter-active.fade-enter
+		transform: translate3d(0, 0vh, 0)
+		transition: transform 1000ms ease
+	&.fade-exit
+		transform: translate3d(0, 0vh, 0)
+	&.fade-exit-active.fade-exit
+		transform: translate3d(0, 100vh, 0)
+		transition: transform 1000ms cubic-bezier(.75, 0, .25, 1)
+	.form
+		position: absolute
+		display: flex
+		align-items: center
+		justify-content: center
+		width: 100%
+		height: 100%
+		text-align: center
+		background-color: rgba(0, 0, 0, 0.5)
+		&.stage-enter
+			opacity: 0
+		&.stage-enter-active.stage-enter
+			opacity: 1
+			transition: opacity 500ms ease
+		&.stage-exit
+			opacity: 1
+		&.stage-exit-active.stage-exit
+			opacity: 0
+			transition: opacity 500ms ease
+	.stage
+		max-width: 75vw
+		margin-bottom: 50px
+		h1
+			margin: 0 0 1rem
+			font-size: 1.5rem
+			line-height: 2rem
+		p	
+			margin: 0 0 1rem
+			font-size: 1rem
+			line-height: 1.5rem
+		input[type="text"]
+			width: 100%
+			padding: 1rem
+			margin: 1rem 0 2rem
+			font-size: 1rem
+			text-align: center
+			border-radius: 1rem
+			border: none
+			&:focus, &:active
+				outline: none
+		.continue, .alert
+			position: absolute
+			width: fit-content
+			margin: auto
+			left: 0
+			right: 0
+			opacity: 0
+			transform: translate3d(0, 20px, 0)
+			transition: all 250ms ease
+			pointer-events: none
+			&.show
+				opacity: 1
+				transform: translate3d(0, 0px, 0)
+				pointer-events: all
+		.continue
+			padding: 15px 50px
+			color: #fff
+			background-color: green
+			border-radius: 20px
+			cursor: pointer
+			z-index: 1
+		.alert
+			color: yellow
+	.stage0
+		.high-five
+			position: relative
+			display: flex
+			align-items: center
+			justify-content: center
+			width: 120px
+			height: 160px
+			margin: 30px auto 0
+		.clap-noise
+			position: absolute
+			top: 50%
+			left: 50%
+			width: 328px
+			height: 400px
+			transform: translate3d(-53%, -50%, 0) scale(.5)
+			@include for-tablet-portrait-up
+				transform: translate3d(-55%, -50%, 0) scale(.5)
+			@include for-tablet-landscape-up
+				transform: translate3d(-56%, -50%, 0) scale(.5)
+			@include for-desktop-up
+				transform: translate3d(-54%, -50%, 0) scale(.5)
+			pointer-events: none
+		.clap-bar
+			position: absolute
+			width: 50px
+			height: 5px
+			&:nth-of-type(1)
+				transform: translate3d(162px, 0, 0) rotate(-90deg)
+			&:nth-of-type(2)
+				transform: translate3d(270px, 50px, 0) rotate(-45deg)
+			&:nth-of-type(3)
+				transform: translate3d(320px ,180px ,0) rotate(0deg)
+			&:nth-of-type(4)
+				transform: translate3d(270px ,360px ,0) rotate(45deg)
+			&:nth-of-type(5)
+				transform: translate3d(162px ,395px ,0) rotate(90deg)
+			&:nth-of-type(6)
+				transform: translate3d(65px, 360px ,0) rotate(135deg)
+			&:nth-of-type(7)
+				transform: translate3d(-15px ,180px ,0) rotate(180deg)
+			&:nth-of-type(8)
+				transform: translate3d(50px ,50px ,0) rotate(225deg)
+		.bar-fill
+			width: 0%
+			height: 100%
+			background-color: #fff
+		.clapped
+			.bar-fill
+				animation-name: clap-bars
+				animation-duration: 500ms
+				animation-fill-mode: both
+				animation-timing-function: ease
+			.you
+				animation-name: clap
+				animation-duration: 150ms
+				animation-fill-mode: both
+				animation-timing-function: ease
+		.us
+			width: 100%
+			height: 100%
+			background-image: url('../../images/hand1.png')
+			background-size: contain
+			background-repeat: no-repeat
+			background-position: center
+			transform: translate3d(-2vw, 0, 0)
+			@include for-desktop-up
+				transform: translate3d(-1vw, 0, 0)
+			cursor: none
+			&:hover
+				+ .you
+					transform: scale(1)
+		.you
+			position: absolute
+			width: 120px
+			height: 160px
+			background-image: url('../../images/hand2.png')
+			background-size: contain
+			background-repeat: no-repeat
+			background-position: center
+			transform: scale(0)
+			transition: transform 250ms ease
+			pointer-events: none
+	.stage2,
+	.stage4,
+	.stage5
+		.options
+			display: flex
+			justify-content: center
+			align-items: center
+			flex-flow: row wrap
+			margin: 20px 0
+		label
+			padding: 15px 10px
+			margin: 10px
+			flex-basis: 40%
+			flex-grow: 1
+			color: #fff
+			border: 1px solid white
+			border-radius: 20px
+			cursor: pointer
+			transition: all 150ms ease
+			&:hover
+				background-color: rgba(255, 255, 255, .2)
+			&.checked
+				color: #000
+				background-color: rgba(255, 255, 255, 1)
+				&:hover
+					background-color: rgba(255, 255, 255, .8)
+		input
+			display: none
+		.select-service
+			opacity: 1
+			transform: translate3d(0, 0px, 0)
+			&.hide
+				opacity: 0
+				transform: translate3d(0, 20px, 0)
+	.stage3
+		textarea
+			min-width: 100%
+			max-width: 100%
+			height: 20vh
+			padding: 1rem
+			margin: 20px 0
+			border-radius: 1rem
+			border: none
+			resize: none
+			&:focus, &:active
+				outline: none

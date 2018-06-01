@@ -1,0 +1,606 @@
+@import 'mixins'
+
+@keyframes in-left
+	from
+		transform: translate3d(-150%, 0, 0)
+	to
+		transform: translate3d(0%, 0, 0)
+@keyframes out-right
+	from
+		transform: translate3d(0%, 0, 0)
+	to
+		transform: translate3d(150%, 0, 0)
+@keyframes swipeable-right
+	0%
+		transform: translate3d(0, 0, 0)
+	10%
+		transform: translate3d(10px, 0, 0)
+	20%
+		transform: translate3d(0, 0, 0)
+	30%
+		transform: translate3d(10px, 0, 0)
+	40%
+		transform: translate3d(0, 0, 0)
+	100%
+		transform: translate3d(0, 0, 0)
+
+
+.project
+	position: absolute
+	width: 100vw
+	height: 100%
+	overflow: hidden
+	.module
+		position: absolute
+		width: 100%
+		height: 100%
+		transition: transform 750ms cubic-bezier(.75, 0, .25, 1)
+		.swipeable-right
+			&.show.first
+				animation-name: swipeable-right
+				animation-delay: 1000ms
+				animation-duration: 4000ms
+				animation-iteration-count: infinite
+		&.current ~ .module
+			transform: translate3d(0, 100%, 0)
+		&.cover-module
+			background-size: cover
+			background-position: center
+			background-repeat: no-repeat
+			@include for-tablet-landscape-up
+				background-position: center !important
+	.story-module
+		> div
+			width: 100%
+			height: 100%
+		.slides-container
+			position: relative
+			width: 100%
+			height: 100%					
+		.story-slide
+			position: absolute
+			display: flex
+			align-items: center
+			justify-content: center
+			flex-direction: column
+			width: 100%
+			height: 100%
+			transform: translate3d(-10%, 0, 0)
+			transition: transform 500ms ease
+			@include for-desktop-up
+				flex-direction: row
+			> div
+				@include for-desktop-up
+					flex-grow: 1
+					flex-basis: 0
+			&.current
+				transform: translate3d(0%, 0, 0)
+			&.current ~ .story-slide
+				transform: translate3d(100%, 0, 0)
+			&.align-background-left
+				background-position: 15% !important
+				@include for-tablet-landscape-up
+					background-position: center !important
+		.empty
+			+ .slide-text
+				text-align: center
+				padding: 0 2rem
+				@include for-desktop-up
+					text-align: left
+					padding: 0 6rem 0 2rem
+				p
+					margin: 0 auto
+					@include for-desktop-up
+						margin: 0 50% 0 0
+			+ .slide-image
+				text-align: left
+		.slide-image
+			padding: 0 2rem 2rem
+			text-align: right
+			@include for-desktop-up
+				padding: 2rem
+			&:only-child
+				padding: 2rem
+				text-align: center
+				img
+					width: 50vw
+					@include for-tablet-portrait-up
+						width: 34vw
+					@include for-tablet-landscape-up
+						width: 24vw
+			img
+				width: 8rem
+				@include for-desktop-up
+					width: 12rem
+			+ .slide-text
+				text-align: left
+				padding: 0 2rem
+				@include for-tablet-portrait-up
+					padding: 1rem 10rem 0 
+				@include for-tablet-landscape-up
+					padding: 1rem 20rem 0 
+				@include for-desktop-up
+					padding: 0 6rem 0 2rem
+				p
+					margin: 0 auto
+					@include for-desktop-up
+						margin: 0 50% 0 0
+			&.feature-image
+				img
+					width: 14rem
+					@include for-tablet-portrait-up
+						width: 20rem
+					@include for-tablet-landscape-up
+						width: 16rem
+		.slide-text
+			padding: 0 2rem
+			text-align: center
+			@include for-desktop-up
+				padding: 0 2rem 0 6rem
+				text-align: right
+			&:only-child
+				text-align: center
+			p
+
+				width: 75%
+				margin: 0 auto 2rem
+				color: #fff
+				font-size: 1rem
+				@include for-tablet-portrait-up
+					font-size: 1.5rem
+				@include for-tablet-landscape-up
+					font-size: 1.2rem
+				@include for-desktop-up
+					width: 50%
+					margin: 0 auto 0 35%
+					font-size: 1.5rem
+			h1
+				margin: 0
+				color: #fff
+				font-family: "HalisGRMedium"
+				font-size: 1.2rem
+				letter-spacing: .3rem
+				text-transform: uppercase
+				@include for-tablet-portrait-up
+					font-size: 1.6rem
+					letter-spacing: .4rem
+				@include for-desktop-up
+					font-size: 2.3rem
+				&.light-header
+					font-family: "FuturaLight"
+					letter-spacing: .5rem
+			+ .slide-image
+				padding: 0 2rem
+				text-align: left
+				img
+					width: 14rem
+				&.separate-left
+					padding: 2rem 1rem 0
+					border-top: 1px solid white
+					@include for-desktop-up
+						padding: 4rem
+						border-top: unset
+						border-left: 1px solid white
+					img
+						@include for-tablet-portrait-up
+							width: 20rem
+		.slide-navigation
+			position: absolute
+			top: 0
+			width: 100%
+			height: 100%
+			pointer-events: none
+			.left-container, .right-container
+				position: absolute
+				width: 30vw
+				height: 50vh
+				top: 25vh
+				cursor: none
+				pointer-events: all
+				display: none
+				@include for-desktop-up
+					display: unset
+				.arrow
+					position: absolute
+					top: 21.5vh
+					left: 13vw
+					width
+					transition: transform 250ms ease
+					pointer-events: none
+					svg
+						pointer-events: none
+				&.hide
+					cursor: auto !important
+					.arrow
+						transform: scale(0) !important
+			.left-container
+				left: 0
+			.right-container
+				right: 0
+			.nav-dots
+				position: absolute
+				width: 100vw
+				bottom: 1.5em
+				left: 0
+				text-align: center
+			.nav-dot
+				display: inline-block
+				width: 10px
+				height: 10px
+				margin: 0 10px
+				background-color: #fff
+				border-radius: 100%
+				transition: background-color 250ms ease
+				cursor: pointer
+				pointer-events: all
+				&.current
+					background-color: #666
+			.swipeable-left, .swipeable-right
+				display: inline-block
+				width: 20px
+				height: 10px
+				margin: 0 15px
+				transition: all 250ms ease
+				opacity: 0
+				@include for-desktop-up
+					display: none
+				&.show
+					opacity: 1
+					margin: 0 30px
+	.flipper-module
+		display: flex
+		align-items: center
+		justify-content: center
+		flex-direction: column-reverse
+		@include for-tablet-portrait-up
+			flex-direction: row
+		.flipper
+			position: relative
+			height: 100%
+			width: 100%
+			flex-basis: 0
+			flex-grow: 3
+			@include for-tablet-portrait-up
+				flex-grow: 1
+		.flipper-container
+			position: absolute
+			width: 100%
+			height: 100%
+			perspective: 800px
+		.flipper-image
+			position: absolute
+			width: 100%
+			height: 100%
+			background-position: center
+			background-size: cover
+			background-repeat: no-repeat
+			transform-style: preserve-3d
+			&.flip-image-exit.prev,
+			&.flip-image-exit.next,
+			&.flip-image-enter.flip-image-enter-active.prev,
+			&.flip-image-enter.flip-image-enter-active.next
+				transform: rotateY(0deg)
+			&.flip-image-enter.prev,
+			&.flip-image-exit.flip-image-exit-active.next
+				transform: rotateY(90deg)
+			&.flip-image-enter.next,
+			&.flip-image-exit.flip-image-exit-active.prev
+				transform: rotateY(-90deg)
+			&.flip-image-enter.flip-image-enter-active.prev,
+			&.flip-image-enter.flip-image-enter-active.next
+				transition: transform 200ms ease-out
+				transition-delay: 200ms
+			&.flip-image-exit.flip-image-exit-active.prev,
+			&.flip-image-exit.flip-image-exit-active.next
+				transition: transform 200ms ease-in
+		.flipper-panel
+			position: absolute
+			width: 100%
+			height: 100%
+			> div
+				width: 100%
+				height: 100%
+			.left, .right
+				position: relative
+				width: 50%
+				height: 100%
+				cursor: none
+				pointer-events: all
+				display: none
+				@include for-desktop-up
+					display: inline-block
+				.arrow
+					position: absolute
+					width: 40px
+					height: 40px
+					transform: scale(0)
+					transition: transform 250ms ease
+					pointer-events: none
+					svg
+						pointer-events: none
+				&:hover > .arrow
+					transform: scale(1)
+			.nav-dots
+				position: absolute
+				width: 100%
+				bottom: 1.5em
+				left: 0
+				text-align: center
+			.nav-dot
+				display: inline-block
+				width: 10px
+				height: 10px
+				margin: 0 10px
+				background-color: #fff
+				border-radius: 100%
+				transition: background-color 250ms ease
+				cursor: pointer
+				pointer-events: all
+				&.current
+					background-color: #666
+			.swipeable-left, .swipeable-right
+				display: inline-block
+				width: 20px
+				height: 10px
+				margin: 0 15px
+				transition: all 250ms ease
+				opacity: 0
+				@include for-desktop-up
+					display: none
+				&.show
+					opacity: 1
+					margin: 0 30px
+		.flipper-text
+			display: flex
+			align-items: center
+			justify-content: center
+			flex-basis: 0
+			flex-grow: 1
+			margin: 100px 2rem 0
+			border-top: 1px solid #fff
+			@include for-tablet-portrait-up
+				padding-top: 0
+				margin: 0
+				border-top: none
+			p
+				padding: 0
+				margin: 0
+				color: #fff
+				font-size: 1rem
+				text-align: center
+				@include for-tablet-portrait-up
+					padding: 0 3rem
+					font-family: 'HalisGRMedium'
+					font-size: 1.5rem
+					text-transform: uppercase
+				@include for-tablet-landscape-up
+					padding: 0 5rem
+					font-size: 1.4rem
+				@include for-desktop-up
+					padding: 0 10rem
+					font-size: 2rem
+	.video-module
+		.video-panel
+			position: absolute
+			top: 0
+			left: 0
+			width: 100%
+			height: 100%
+			cursor: none
+			pointer-events: all
+			.play-button
+				position: fixed
+				width: 80px
+				height: 80px
+				transform: scale(0)
+				transition: transform 250ms ease
+				pointer-events: none
+				svg
+					pointer-events: none
+			&:hover > .play-button
+				transform: scale(1)
+			&.playing
+				cursor: auto
+				.play-button
+					transform: scale(0)
+			video
+				position: absolute
+				min-width: 100%
+				min-height: 100%
+				width: auto
+				height: auto
+				pointer-events: none
+	.nav-module
+		> div
+			display: inline-block
+			height: 100%
+			z-index: 2
+			overflow: hidden
+		.project-container
+			position: relative
+			justify-content: center
+			display: flex
+			align-items: center
+			width: 100%
+			height: 100%
+			a
+				position: absolute
+				top: 50%
+				left: 50%
+				display: block
+				padding: 2rem
+				color: #fff
+				font-family: "HalisGRMedium"
+				font-size: 2rem
+				text-align: center
+				text-decoration: none
+				text-transform: uppercase
+				transform: translate3d(-50%, -50%, 0)
+				z-index: 2
+				.project-text
+					opacity: 1
+					transform: translate3d(0, 0, 0)
+					transition: all 250ms ease
+					white-space: nowrap
+				svg
+					width: 5rem
+					opacity: 1
+					transition: opacity 250ms ease
+				&:hover
+					.project-text
+						opacity: 0
+						transform: translate3d(0, 10px, 0)
+					svg
+						opacity: 0
+					&~ .project-background
+						transform: scale(1)
+			.cover
+				position: absolute
+				width: 100%
+				height: 100%
+				background-color: #fff
+				z-index: 1
+			.project-background
+				width: 100%
+				height: 100%
+				background-position: center
+				background-size: cover
+				background-repeat: no-repeat
+				transform: scale(1.1)
+				transition: all 250ms ease
+				transition-delay: 250ms
+		.prev-project
+			width: 0%
+			@include for-desktop-up
+				width: 50%
+			.project-container
+				a
+					svg
+						animation-name: out-right
+						animation-direction: reverse
+						animation-duration: 250ms
+						animation-timing-function: ease
+						animation-fill-mode: both
+					&:hover
+						svg
+							animation-name: in-left
+							animation-direction: reverse
+							animation-duration: 250ms
+							animation-timing-function: ease
+							animation-fill-mode: both
+						&+ .cover
+							animation-name: in-left
+							animation-direction: reverse
+							animation-duration: 250ms
+							animation-timing-function: ease
+							animation-fill-mode: both
+							animation-delay: 250ms
+				.cover
+					animation-name: out-right
+					animation-direction: reverse
+					animation-duration: 250ms
+					animation-timing-function: ease
+					animation-fill-mode: both
+		.next-project
+			width: 100%
+			@include for-desktop-up
+				width: 50%
+			.project-container
+				a
+					svg
+						animation-name: in-left
+						animation-duration: 250ms
+						animation-timing-function: ease
+						animation-fill-mode: both
+					&:hover
+						svg
+							animation-name: out-right
+							animation-duration: 250ms
+							animation-timing-function: ease
+							animation-fill-mode: both
+						&+ .cover
+							animation-name: out-right
+							animation-duration: 250ms
+							animation-timing-function: ease
+							animation-fill-mode: both
+							animation-delay: 250ms
+				.cover
+					animation-name: in-left
+					animation-duration: 250ms
+					animation-timing-function: ease
+					animation-fill-mode: both
+	.contact-link
+		position: fixed
+		right: 0
+		bottom: 3.5em
+		left: 0
+		text-align: center
+		overflow: hidden
+		@include for-desktop-up
+			right: unset
+			bottom: 2em
+			left: 2em
+		.link
+			transform: translate3d(0, 150px, 0)
+			transition: transform 500ms cubic-bezier(.75, 0, .25, 1)
+			transition-delay: 0ms
+			@include for-desktop-up
+				transform: translate3d(-250px, 0, 0)
+			a
+				color: #fff
+				font-family: "HalisGRMedium"
+				font-size: 1rem
+				letter-spacing: 0.2rem
+				text-decoration: none
+				text-transform: uppercase
+				@include for-desktop-up
+					font-size: 1.5rem
+		&.show
+			.link
+				transition-delay: 500ms
+				transform: translate3d(0, 0, 0)
+	&.fade-enter
+		.dotMenu
+			opacity: 0
+	&.fade-exit
+		.dotMenu
+			opacity: 0
+	&.fade-exit.fade-exit-active
+		.nav-module
+			.exiting
+				width: 0%
+				transition: width 1000ms ease
+			.entering
+				width: 100%
+				transition: width 1000ms ease
+				.project-container
+					svg, .project-text, .cover
+						@include for-desktop-up
+							opacity: 0
+					svg, .cover
+						animation-name: out-right
+						animation-duration: 250ms
+						animation-timing-function: ease
+						animation-fill-mode: both
+					.project-text
+						opacity: 0
+					.cover
+						animation-delay: 250ms
+				.project-background
+					transform: scale(1)
+					transition-duration: 1000ms
+					transition-delay: 0ms
+					@include for-desktop-up
+						background-position: 50% !important
+	&#yha
+		.cover-module
+			background-position: 75%
+	&#julian
+		.cover-module
+			background-position: 62%
+	&#s55
+		.cover-module
+			background-position: 42%
+	&#food
+		.cover-module
+			background-position: 36%

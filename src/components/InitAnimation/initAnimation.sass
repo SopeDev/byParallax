@@ -1,0 +1,51 @@
+@import '../../views/styles/mixins'
+
+#pre-loader
+	&.loader-exit
+		transform: translate3d(0vw, 0, 0)
+	&.loader-exit.loader-exit-active
+		transform: translate3d(-10vw, 0, 0)
+		transition: transform 1000ms cubic-bezier(.75, 0, .25, 1)
+	.curtains
+		position: absolute
+		width: 100vw
+		height: 100%
+		overflow: hidden
+		div
+			position: absolute
+			height: 100%
+			background-color: #2f373c
+		.curtain-first
+			left: 0
+		.curtain-second
+			right: 0
+	.background-images-container
+		position: absolute
+		top: 0
+		width: 100%
+		height: 100%
+		background-color: #000
+		.animation-background
+			position: absolute
+			width: 100%
+			height: 100%
+			background-size: cover
+			background-repeat: no-repeat
+			&:nth-of-type(1)
+				background-position: -190vw
+				@include for-tablet-portrait-up
+					background-position: -135vw
+				@include for-tablet-landscape-up
+					background-position: -65vw
+				@include for-desktop-up
+					background-position: -45vw
+			&:nth-of-type(2)
+				background-position: center
+			&:nth-of-type(3)
+				background-position: -85vw
+				@include for-tablet-portrait-up
+					background-position: -45vw
+				@include for-tablet-landscape-up
+					background-position: 10vw
+				@include for-desktop-up
+					background-position: 25vw

@@ -1,0 +1,150 @@
+@import '../../views/styles/mixins'
+
+.navigation
+	z-index: 1000
+	.nav-bar
+		position: absolute
+		width: 100vw
+		height: 0px
+		z-index: 1002
+		.toggle
+			position: absolute
+			display: flex
+			width: 30px
+			height: 30px
+			top: 2em
+			left: 2em
+			justify-content: space-between
+			flex-direction: column
+			cursor: pointer
+			transition: transform 250ms cubic-bezier(.2,.7,.3,.9)
+			.pattie
+				position: absolute
+				height: 2px
+				left: 2px
+				background-color: #fff
+				transition: background-color 500ms ease-in-out, width 250ms cubic-bezier(.2,.7,.3,.9), transform 250ms cubic-bezier(.2,.7,.3,.9), top 250ms cubic-bezier(.2,.7,.3,.9), left 250ms cubic-bezier(.2,.7,.3,.9)
+				&:nth-of-type(1)
+					width: 26px
+					top: 4px
+				&:nth-of-type(2)
+					width: 18px
+					top: 14px
+				&:nth-of-type(3)
+					width: 10px
+					top: 24px
+			&:hover
+				.pattie
+					&:nth-of-type(2),
+					&:nth-of-type(3)
+						width: 26px
+		.logo
+			position: absolute
+			top: 2em
+			right: 2em
+			width: 200px
+			@include for-tablet-portrait-up
+				width: 250px
+			img
+				width: 100%
+				filter: invert(0%)
+				transition: filter 500ms ease-in-out
+		&.invert
+			.toggle
+				.pattie
+					background-color: #000
+			.logo
+				img
+					filter: invert(100%)
+		&.collapsed
+			.toggle
+				transform: rotate(180deg)
+				.pattie
+					background-color: #fff
+					&:nth-of-type(1)
+						transform: rotate(-45deg)
+						top: 12px
+					&:nth-of-type(2)
+						width: 0px
+						top: 12px
+						left: 12px
+					&:nth-of-type(3)
+						width: 26px
+						transform: rotate(45deg)
+						top: 12px
+						left: 2px
+				&:hover
+					transform: rotate(270deg)
+			.logo
+				img
+					filter: invert(0%)
+	.nav-panel
+		position: absolute
+		display: flex
+		align-items: center
+		justify-content: center
+		overflow: hidden
+		z-index: 1001
+		.menu-background
+			position: absolute
+			top: 50%
+			left: 50%
+			width: 100%
+			height: 100%
+			background-size: cover
+			background-position: center
+			background-repeat: no-repeat
+			transform: translate3d(-50%, -50%, 0)
+		.video-container
+			position: absolute
+			top: 0
+			left: 0
+			width: 100%
+			height: 100%
+			video
+				min-width: 100%
+				min-height: 100%
+				width: auto
+				height: auto
+		.overlay
+			position: absolute
+			top: 0
+			left: 0
+			width: 100%
+			height: 100%
+			background-color: rgba(0, 0, 0, 0.5)
+		ul
+			margin: 0
+			padding: 0
+			li
+				position: relative
+				display: block
+				text-align: center
+				list-style: none
+				overflow: hidden
+				&:first-of-type
+					margin-bottom: 15px
+				span
+					position: relative
+					display: inline-block
+					padding: 10px 0
+					text-indent: .5rem
+					a
+						color: #fff
+						font-family: "HalisGRMedium"
+						font-size: 2rem
+						letter-spacing: .2rem
+						@include for-tablet-portrait-up
+							font-size: 2.5rem
+							letter-spacing: .3rem
+						@include for-tablet-landscape-up
+							font-size: 3rem
+							letter-spacing: .4rem
+						@include for-desktop-up
+							font-size: 3.5rem
+							letter-spacing: .5rem
+						text-decoration: none
+						text-transform: uppercase
+						div
+							display: inline-block
+							transform-origin: center bottom 0px

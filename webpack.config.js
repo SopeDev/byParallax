@@ -44,8 +44,8 @@ module.exports = {
 						loader: 'url-loader',
 						options: {
 							limit: 10000,
-							publicPath: '/',
-							name: 'images/[hash]-[name].[ext]'
+							publicPath: '/byParallax/',
+							name: '/images/[hash]-[name].[ext]'
 						}
 					},
 					{
@@ -78,7 +78,7 @@ module.exports = {
 	},
 	output: {
 		path: __dirname + '/docs',
-		publicPath: '/',
+		publicPath: '/byParallax',
 		filename: '[name].js'
 	},
 	plugins: [

@@ -1,11 +1,4 @@
 import React from 'react'
-<<<<<<< Updated upstream
-
-export default class Projects extends React.Component {
-	render() {
-		return (
-			<div>This is Projects</div>
-=======
 import { Link } from 'react-router-dom'
 import { Motion, spring } from 'react-motion'
 import { inject } from 'mobx-react'
@@ -146,7 +139,6 @@ export default class Projects extends React.Component {
 					</Motion> : null
 				}
 			</div>
->>>>>>> Stashed changes
 		)
 	}
 }

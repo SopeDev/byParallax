@@ -5,7 +5,6 @@ const webpack = require('webpack');
 
 module.exports = {
 	entry: [
-		// 'react-hot-loader/patch',
 		'./src/index.js'
 	],
 	module: {
@@ -45,7 +44,7 @@ module.exports = {
 						loader: 'url-loader',
 						options: {
 							limit: 10000,
-							publicPath: 'assets/',
+							publicPath: '/',
 							name: 'images/[hash]-[name].[ext]'
 						}
 					},
@@ -79,7 +78,7 @@ module.exports = {
 	},
 	output: {
 		path: __dirname + '/docs',
-		publicPath: '/byparallax',
+		publicPath: '/',
 		filename: '[name].js'
 	},
 	plugins: [

@@ -15,5 +15,3 @@ ReactDOM.render(
 		)} />
 	</Router>,
 app);
-
-module.hot.accept();

@@ -29,9 +29,9 @@ export default withRouter(
 				loading: true,
 				initLoad: true,
 				routes: [
-					"/",
-					"/projects",
-					"/contact"
+					"/byParallax/",
+					"/byParallax/projects/",
+					"/byParallax/contact/"
 				],
 				currentRoute: "",
 				scrollValue: 0,
@@ -136,7 +136,7 @@ export default withRouter(
 
 		_manageDotNavigation(targetLocation) {
 			if (!this.state.routing) {
-				if (this.props.location.pathname == "/" && targetLocation == "/projects") {
+				if (this.props.location.pathname == "byParallax/" && targetLocation == "byParallax/projects") {
 					this.setState({scrollValue: 100})
 				}
 				if (this.props.location.pathname != targetLocation) {
@@ -157,8 +157,10 @@ export default withRouter(
 
 		render() {
 			const loadingKey = this.state.loading ? "loader" : "app"
-			const shouldManageNavigation = this.state.currentRoute == "/" || this.state.currentRoute == "/projects" || this.state.currentRoute == "/contact" ? true : false
+			const shouldManageNavigation = this.state.currentRoute == "/byParallax/" || this.state.currentRoute == "/byParallax/projects/" || this.state.currentRoute == "/byParallax/contact/" ? true : false
 			const stores = { CarouselStore, ContactStore, MediaStore, ProjectsStore }
+
+			console.log(this.props.location.pathname)
 
 			return (
 				<TransitionGroup>
@@ -179,8 +181,8 @@ export default withRouter(
 										<Nav location={this.props.location.pathname}/>
 										{ shouldManageNavigation ? <DotMenu
 											location={this.props.location.pathname}
-											routes={["/","/projects","/contact"]}
-											invertLocation={["/projects"]}
+											routes={["/byParallax/","/byParallax/projects/","/byParallax/contact/"]}
+											invertLocation={["/byParallax/projects/"]}
 											manageDotNavigation={ this._manageDotNavigation }
 										/> : null }
 										<TransitionGroup>
@@ -190,10 +192,10 @@ export default withRouter(
 												timeout={1000}
 											>
 												<Switch location={this.props.location}>
-													<Route exact path='/' render={() => <Home scrollValue={this.state.scrollValue} initLoad={this.state.initLoad}/>}/>
-													<Route exact path='/projects' render={() => <Projects initLoad={this.state.initLoad}/>}/>
-													<Route exact path='/projects/:projectId' component={Project} />
-													<Route exact path='/contact' component={Contact}/>
+													<Route exact path='/byParallax/' render={() => <Home scrollValue={this.state.scrollValue} initLoad={this.state.initLoad}/>}/>
+													<Route exact path='/byParallax/projects/' render={() => <Projects initLoad={this.state.initLoad}/>}/>
+													<Route exact path='/byParallax/projects/:projectId/' component={Project} />
+													<Route exact path='/byParallax/contact/' component={Contact}/>
 												</Switch>
 											</CSSTransition>
 										</TransitionGroup>

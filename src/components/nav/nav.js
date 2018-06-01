@@ -73,7 +73,7 @@ export default class Nav extends React.Component {
 		const { open, shown, mobile } = this.state
 		const { MediaStore, location } = this.props
 
-		const navInvertClass = location == "/" || location == "/contact" || /\/projects\/[a-z]+/g.test(location) ? "" : " invert"
+		const navInvertClass = location == "/byParallax/" || location == "/byParallax/contact/" || /\/byParallax\/projects\/[a-z0-9]+\//g.test(location) ? "" : " invert"
 		const navPanelClass = open ? " collapsed" : "";
 
 		const menuBackground = mobile ? (
@@ -98,7 +98,7 @@ export default class Nav extends React.Component {
 						<span className="pattie"></span>
 					</div>
 					<div className="logo">
-						<Link to="/" onClick={() => this._handleMenu("home")}>
+						<Link to="/byParallax/" onClick={() => this._handleMenu("home")}>
 							<img src={MediaStore.logo[0]} alt="Parallax Creative"/>
 						</Link>
 					</div>
@@ -126,7 +126,7 @@ export default class Nav extends React.Component {
 									<ul>
 										<li>
 											<span style={{transform: `translateX(-${styles[0].offset}px)`}}>
-												<Link to="/projects" onClick={ this._handleMenu }>
+												<Link to="/byParallax/projects/" onClick={ this._handleMenu }>
 													{this.state.links[0].split('').map((letter, i)=>{
 														return <BouncyLetter key={letter + i} letter={letter} />
 													})}
@@ -135,7 +135,7 @@ export default class Nav extends React.Component {
 										</li>
 										<li>
 											<span style={{transform: `translateX(${styles[1].offset}px)`}}>
-												<Link to="/contact" onClick={ this._handleMenu }>
+												<Link to="/byParallax/contact/" onClick={ this._handleMenu }>
 													{this.state.links[1].split('').map((letter, i)=>{
 														return <BouncyLetter key={letter + i} letter={letter} />
 													})}

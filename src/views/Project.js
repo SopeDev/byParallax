@@ -104,7 +104,7 @@ export default class Project extends React.Component {
 			<div key={modules.length} className="module nav-module">
 				<div ref={this.prevLink} className="prev-project">
 					<div className="project-container">
-						<Link to={"/projects/" + ProjectsStore.projects[prevProject].key} onClick={this._pushPrevProject}>
+						<Link to={"/byParallax/projects/" + ProjectsStore.projects[prevProject].key + "/"} onClick={this._pushPrevProject}>
 							<div className="project-text">previous project</div>
 							<svg version="1.1" x="0px" y="0px" viewBox="0 0 14.4 2.3">
 								<polyline fill="none" stroke="#fff" strokeWidth="0.2835" points="1.2,0.1 0.1,1.1 1.2,2.2 "></polyline>
@@ -120,7 +120,7 @@ export default class Project extends React.Component {
 				</div>
 				<div ref={this.nextLink} className="next-project">
 					<div className="project-container">
-						<Link to={"/projects/" + ProjectsStore.projects[nextProject].key} onClick={this._pushNextProject}>
+						<Link to={"/byParallax/projects/" + ProjectsStore.projects[nextProject].key + "/"} onClick={this._pushNextProject}>
 							<div className="project-text">next project</div>
 							<svg version="1.1" x="0px" y="0px" viewBox="0 0 14.4 2.3">
 								<line fill="none" stroke="#fff" strokeWidth="0.2835" x1="0" y1="1.1" x2="14" y2="1.1"></line>
@@ -154,7 +154,7 @@ export default class Project extends React.Component {
 					/>
 					<div className={"contact-link" + showContact}>
 						<div className="link">
-							<Link to="/contact">Contact Us</Link>
+							<Link to="byParallax/contact">Contact Us</Link>
 						</div>
 					</div>
 				</Swipeable>

@@ -90,7 +90,7 @@ export default class Projects extends React.Component {
 			<div className="projects">
 				<div className="tile-board">
 					{ProjectsStore.projects.map((project, i) =>
-						<Link key={project.key} to={"/projects/" + project.key}>
+						<Link key={project.key} to={"./" + project.key + "/"}>
 							<div
 								className="tile"
 								style={{

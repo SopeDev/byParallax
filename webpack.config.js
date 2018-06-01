@@ -4,9 +4,7 @@ const MinifyPlugin = require("babel-minify-webpack-plugin");
 const webpack = require('webpack');
 
 module.exports = {
-	entry: [
-		'./src/index.js'
-	],
+	entry: './src/index.js',
 	module: {
 		rules: [
 			{
@@ -45,7 +43,7 @@ module.exports = {
 						options: {
 							limit: 10000,
 							publicPath: '/byParallax/',
-							name: '/images/[hash]-[name].[ext]'
+							name: 'images/[hash]-[name].[ext]'
 						}
 					},
 					{

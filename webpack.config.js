@@ -1,9 +1,6 @@
-<<<<<<< Updated upstream
-=======
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MinifyPlugin = require("babel-minify-webpack-plugin");
->>>>>>> Stashed changes
 const webpack = require('webpack');
 
 module.exports = {
@@ -17,9 +14,6 @@ module.exports = {
 				test: /\.(js|jsx)$/,
 				exclude: /node_modules/,
 				use: ['babel-loader']
-<<<<<<< Updated upstream
-			}
-=======
 			},
 			{
 				test: /\.sass$/,
@@ -51,7 +45,7 @@ module.exports = {
 						loader: 'url-loader',
 						options: {
 							limit: 10000,
-							publicPath: 'assets/'
+							publicPath: 'assets/',
 							name: 'images/[hash]-[name].[ext]'
 						}
 					},
@@ -78,26 +72,12 @@ module.exports = {
 					}
 				]
 			},
->>>>>>> Stashed changes
 		]
 	},
 	resolve: {
 		extensions: ['*', '.js', '.jsx']
 	},
 	output: {
-<<<<<<< Updated upstream
-		path: __dirname + '/dist',
-		publicPath: '/',
-		filename: 'bundle.js'
-	},
-	plugins: [
-    	new webpack.HotModuleReplacementPlugin()
-	],
-	devServer: {
-		historyApiFallback: true,
-		contentBase: './dist',
-		hot: true
-=======
 		path: __dirname + '/docs',
 		publicPath: '/byparallax',
 		filename: '[name].js'
@@ -119,6 +99,5 @@ module.exports = {
 			]
 		},
 		contentBase: './docs',
->>>>>>> Stashed changes
 	}
 };

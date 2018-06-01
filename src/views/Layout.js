@@ -1,12 +1,4 @@
 import React from 'react'
-<<<<<<< Updated upstream
-
-export default class Layout extends React.Component {
-	render() {
-		return (
-			<div>This is a Layout</div>
-		)
-=======
 import { withRouter } from 'react-router-dom'
 import { Provider } from 'mobx-react';
 import { Route, Switch } from 'react-router-dom'
@@ -223,6 +215,5 @@ export default withRouter(
 		shouldComponentUpdate(nextProps, nextState) {
 			return this.state.loading || this.props.location.key != nextProps.location.key || this.state.scrollValue != nextState.scrollValue
 		}
->>>>>>> Stashed changes
 	}
-}
+)

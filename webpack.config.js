@@ -64,6 +64,7 @@ module.exports = {
 					{
 						loader: 'file-loader',
 						options: {
+							publicPath: '/byParallax/',
 							name: 'videos/[hash]-[name].[ext]'
 						}
 					}

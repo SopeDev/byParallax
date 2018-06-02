@@ -160,8 +160,6 @@ export default withRouter(
 			const shouldManageNavigation = this.state.currentRoute == "/byParallax/" || this.state.currentRoute == "/byParallax/projects/" || this.state.currentRoute == "/byParallax/contact/" ? true : false
 			const stores = { CarouselStore, ContactStore, MediaStore, ProjectsStore }
 
-			console.log(this.props.location.pathname)
-
 			return (
 				<TransitionGroup>
 					<CSSTransition

@@ -18,8 +18,6 @@ export default class DotMenu extends React.Component {
 		const upSwiperClass = currentRouteIndex > 0 ? "show" : ""
 		const downSwiperClass = currentRouteIndex < routes.length - 1 ? currentRouteIndex == 0 ? "show first" : "show" : ""
 
-		console.log(dots)
-
 		return (
 			<div className={"dotMenu" + invertClass}>
 				<div className="dotContainer">

@@ -171,11 +171,11 @@ export default withRouter(
 							{ this.state.loading ?
 								<InitAnimation renderLayout={this._renderLayout}/>
 							:
-									<div className="layout" onWheel={ shouldManageNavigation ? this._handleWheel : null } onScroll={ shouldManageNavigation ? this._disableRouting : null}>
-								<Swipeable
-									onSwipedUp={ shouldManageNavigation ? this._navDown : null }
-									onSwipedDown={ shouldManageNavigation ? this._navUp : null }
-								>
+								<div className="layout" onWheel={ shouldManageNavigation ? this._handleWheel : null } onScroll={ shouldManageNavigation ? this._disableRouting : null}>
+									<Swipeable
+										onSwipedUp={ shouldManageNavigation ? this._navDown : null }
+										onSwipedDown={ shouldManageNavigation ? this._navUp : null }
+									>
 										<Nav location={this.props.location.pathname}/>
 										{ shouldManageNavigation ? <DotMenu
 											location={this.props.location.pathname}
@@ -197,8 +197,8 @@ export default withRouter(
 												</Switch>
 											</CSSTransition>
 										</TransitionGroup>
-								</Swipeable>
-									</div>
+									</Swipeable>
+								</div>
 							}
 						</Provider>
 					</CSSTransition>

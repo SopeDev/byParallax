@@ -154,7 +154,7 @@ export default class Project extends React.Component {
 					/>
 					<div className={"contact-link" + showContact}>
 						<div className="link">
-							<Link to="byParallax/contact">Contact Us</Link>
+							<Link to="/byParallax/contact/">Contact Us</Link>
 						</div>
 					</div>
 				</Swipeable>

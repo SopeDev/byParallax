@@ -115,13 +115,13 @@ export default class FlipperModule extends React.Component {
 								</div>
 							</div>
 							<div className="nav-dots">
-								<div className={"swipeable-left " + leftSwiperClass}>
+								<div className={"swipeable-left " + leftSwiperClass} onClick={this._prevImage}>
 									<svg width="5px" height="10px">
 										<polyline fill="none" stroke="#fff" strokeWidth="1" points="4.9,.1 .1,5 4.9,9.9"></polyline>
 									</svg>
 								</div>
 									{navDots}
-								<div className={"swipeable-right " + rightSwiperClass}>
+								<div className={"swipeable-right " + rightSwiperClass} onClick={this._nextImage}>
 									<svg width="5px" height="10px">
 										<polyline fill="none" stroke="#fff" strokeWidth="1" points=".1,.1 4.9,5 .1,9.9"></polyline>
 									</svg>

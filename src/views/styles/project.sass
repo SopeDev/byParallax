@@ -1,5 +1,10 @@
 @import 'mixins'
 
+@keyframes in-up
+	from
+		transform: translate3d(0, -100px, 0)
+	to
+		transform: translate3d(0, 0, 0)
 @keyframes in-left
 	from
 		transform: translate3d(-150%, 0, 0)
@@ -43,12 +48,40 @@
 				animation-iteration-count: infinite
 		&.current ~ .module
 			transform: translate3d(0, 100%, 0)
-		&.cover-module
-			background-size: cover
-			background-position: center
-			background-repeat: no-repeat
-			@include for-tablet-landscape-up
-				background-position: center !important
+	.cover-module
+		display: flex
+		align-items: flex-end
+		justify-content: center
+		background-size: cover
+		background-position: center
+		background-repeat: no-repeat
+		@include for-tablet-landscape-up
+			background-position: center !important
+		.scroll
+			color: #FFF 
+			text-align: center
+			overflow: hidden
+			.scroll-mobile
+				display: block
+				@include for-desktop-up
+					display: none
+			.scroll-desktop
+				display: none
+				@include for-desktop-up
+					display: block
+			.scroll-mobile, .scroll-desktop
+				animation-name: in-up
+				animation-delay: 1000ms
+				animation-duration: 350ms
+				animation-timing-function: ease
+				animation-fill-mode: both
+			svg line
+				animation-name: in-up
+				animation-delay: 1300ms
+				animation-duration: 350ms
+				animation-timing-function: ease
+				animation-fill-mode: both
+				
 	.story-module
 		> div
 			width: 100%
@@ -238,10 +271,12 @@
 			.swipeable-left, .swipeable-right
 				display: inline-block
 				width: 20px
-				height: 10px
+				height: 20px
 				margin: 0 15px
 				transition: all 250ms ease
 				opacity: 0
+				cursor: pointer
+				pointer-events: all 
 				&.show
 					opacity: 1
 					margin: 0 30px
@@ -339,10 +374,11 @@
 			.swipeable-left, .swipeable-right
 				display: inline-block
 				width: 20px
-				height: 10px
+				height: 20px
 				margin: 0 15px
 				transition: all 250ms ease
 				opacity: 0
+				cursor: pointer
 				&.show
 					opacity: 1
 					margin: 0 30px

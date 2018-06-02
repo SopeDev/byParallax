@@ -27,7 +27,6 @@ export default class Nav extends React.Component {
 
 	_handleMenu(origin) {
 		if (this.state.open == false) {
-			// this.videoBackground.current.play()
 			if (origin != "home") {
 				if (this.props.CarouselStore.disabled == false) {
 					this.props.CarouselStore.stopCarousel()
@@ -40,7 +39,6 @@ export default class Nav extends React.Component {
 		} else {
 			this._toggleLinks()
 			setTimeout(()=>{
-				// this.videoBackground.current.pause()
 				this._togglePanel()
 				if (this.props.CarouselStore.disabled == false) {
 					this.props.CarouselStore.startCarousel()
@@ -50,8 +48,6 @@ export default class Nav extends React.Component {
 	}
 
 	_updateNavBackground() {
-		// console.log(this.state.mobile)
-		// console.log(window.innerWidth)
 		if (this.state.mobile && window.innerWidth >= 1200) {
 			this.setState({ mobile: false })
 		} else if (!this.state.mobile && window.innerWidth < 1200) {

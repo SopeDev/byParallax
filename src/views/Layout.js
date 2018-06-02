@@ -136,7 +136,7 @@ export default withRouter(
 
 		_manageDotNavigation(targetLocation) {
 			if (!this.state.routing) {
-				if (this.props.location.pathname == "byParallax/" && targetLocation == "byParallax/projects") {
+				if (this.props.location.pathname == "/byParallax/" && targetLocation == "/byParallax/projects/") {
 					this.setState({scrollValue: 100})
 				}
 				if (this.props.location.pathname != targetLocation) {

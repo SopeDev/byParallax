@@ -21,13 +21,13 @@ export default class DotMenu extends React.Component {
 		return (
 			<div className={"dotMenu" + invertClass}>
 				<div className="dotContainer">
-					<div className={"swipeable-up " + upSwiperClass}>
+					<div className={"swipeable-up " + upSwiperClass} onClick={routes[currentRouteIndex - 1] ? ()=>{manageDotNavigation(routes[currentRouteIndex - 1])} : null}>
 						<svg width="10px" height="5px">
 							<polyline fill="none" stroke="#fff" strokeWidth="1" points="0,5 5,0 10,5"></polyline>
 						</svg>
 					</div>
 					{ dots }
-					<div className={"swipeable-down " + downSwiperClass}>
+					<div className={"swipeable-down " + downSwiperClass} onClick={routes[currentRouteIndex + 1] ? ()=>{manageDotNavigation(routes[currentRouteIndex + 1])} : null}>
 						<svg width="10px" height="5px">
 							<polyline fill="none" stroke="#fff" strokeWidth="1" points="0,0 5,5 10,0"></polyline>
 						</svg>

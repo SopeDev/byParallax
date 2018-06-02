@@ -125,13 +125,13 @@ export default class StoryModule extends React.Component {
 							</div>
 						</div>
 						<div className="nav-dots">
-							<div className={"swipeable-left " + leftSwiperClass}>
+							<div className={"swipeable-left " + leftSwiperClass} onClick={this._prevSlide}>
 								<svg width="5px" height="10px">
 									<polyline fill="none" stroke="#fff" strokeWidth="1" points="5,0 0,5 5,10"></polyline>
 								</svg>
 							</div>
 							{navDots}
-							<div className={"swipeable-right " + rightSwiperClass}>
+							<div className={"swipeable-right " + rightSwiperClass} onClick={this._nextSlide}>
 								<svg width="5px" height="10px">
 									<polyline fill="none" stroke="#fff" strokeWidth="1" points="0,0 5,5 0,10"></polyline>
 								</svg>

@@ -55,16 +55,12 @@ export default class Projects extends React.Component {
 			<div className="projects">
 				<Motion
 					defaultStyle={{
-						width: 80,
-						height: 70,
-						translateX: 10,
-						translateY: 15
+						borderY: 15,
+						borderX: 10
 					}}
 					style={{
-						width: navToProject ? spring(100) : 80, 
-						height: navToProject ? spring(100) : 70,
-						translateX: navToProject ? spring(0) : 10,
-						translateY: navToProject ? spring(0) : 15
+						borderY: navToProject ? spring(0, {stiffness: 200, dampness: 28}) : 15,
+						borderX: navToProject ? spring(0, {stiffness: 200, dampness: 28}) : 10
 					}}
 				>
 					{(style) =>
@@ -73,9 +69,7 @@ export default class Projects extends React.Component {
 							onSwipedRight={this._prevProject}
 							className="tile-board"
 							style={{
-								width: `${style.width}vw`,
-								height: `${style.height}vh`,
-								transform: `translate3d(${style.translateX}vw, ${style.translateY}vh, 0)`
+								borderWidth: `${style.borderY}vh ${style.borderX}vw`
 							}}
 						>
 							{ProjectsStore.projects.map((project, i) =>

@@ -52,7 +52,7 @@ module.exports = {
 							bypassOnDebug: true,
 							mozjpeg: {
 								progressive: true,
-								quality: 65
+								quality: 100
 							},
 						}
 					},

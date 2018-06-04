@@ -51,14 +51,16 @@ export default withRouter(
 		_pushRoute(currentRouteIndex, dir) {
 			clearTimeout(this.resetTotalScroll)
 			const nextRoute = dir == "next" ? 1 : -1
-			this.setState({routing: true})
-			this.props.history.push(this.state.routes[currentRouteIndex + nextRoute])
+			this.setState({routing: true})		
 			setTimeout(()=>{
-				this.setState({
-					scrollValue: 0,
-					routing: false
-				})
-			}, 1000)
+				this.props.history.push(this.state.routes[currentRouteIndex + nextRoute])
+				setTimeout(()=>{
+					this.setState({
+						scrollValue: 0,
+						routing: false
+					})
+				}, 900)
+			}, 100)
 		}
 
 		_handleWheel(e) {
@@ -100,22 +102,34 @@ export default withRouter(
 
 		_navUp() {
 			if (!this.state.routing) {
-				const currentRouteIndex = this.state.routes.findIndex((route)=>{
-					return route == this.state.currentRoute
-				})		
-				if (currentRouteIndex > 0) {
-					this._pushRoute(currentRouteIndex, "prev")
+				if (this.state.currentRoute == "/byParallax/projects/" && ProjectsStore.currentProject > 0) {
+					this.setState({routing: true})
+					ProjectsStore.prevProject()
+					setTimeout(()=>{ this.setState({ scrollValue: 0, routing: false }) }, 500)
+				} else {
+					const currentRouteIndex = this.state.routes.findIndex((route)=>{
+						return route == this.state.currentRoute
+					})		
+					if (currentRouteIndex > 0) {
+						this._pushRoute(currentRouteIndex, "prev")
+					}
 				}
 			}
 		}
 
 		_navDown() {
 			if (!this.state.routing) {
-				const currentRouteIndex = this.state.routes.findIndex((route)=>{
-					return route == this.state.currentRoute
-				})		
-				if (currentRouteIndex < this.state.routes.length - 1) {
-					this._pushRoute(currentRouteIndex, "next")
+				if (this.state.currentRoute == "/byParallax/projects/" && ProjectsStore.currentProject < ProjectsStore.projects.length - 1) {
+					this.setState({routing: true})
+					ProjectsStore.nextProject()
+					setTimeout(()=>{ this.setState({ scrollValue: 0, routing: false }) }, 500)
+				} else {
+					const currentRouteIndex = this.state.routes.findIndex((route)=>{
+						return route == this.state.currentRoute
+					})		
+					if (currentRouteIndex < this.state.routes.length - 1) {
+						this._pushRoute(currentRouteIndex, "next")
+					}
 				}
 			}
 		}
@@ -127,8 +141,10 @@ export default withRouter(
 						routing: true,
 						scrollValue: 0
 					})
-					this.props.history.push(targetLocation)
-					setTimeout(()=>{ this.setState({routing: false}) }, 100)
+					setTimeout(()=>{
+						this.props.history.push(targetLocation)
+						setTimeout(()=>{ this.setState({routing: false}) }, 900)
+					}, 100)
 				}
 			}
 		}

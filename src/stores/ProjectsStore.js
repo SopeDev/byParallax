@@ -2,6 +2,7 @@ import { observable } from 'mobx'
 import MediaStore from './MediaStore'
 
 class ProjectsStore {
+	@observable currentProject = 0 
 	@observable projects = [{
 		key: "s55",
 		title: "Spanish55",
@@ -266,6 +267,22 @@ class ProjectsStore {
 			}
 		]
 	}]
+
+	prevProject() {
+		if (this.currentProject > 0) {
+			this.currentProject = this.currentProject - 1 
+		}
+	}
+
+	nextProject() {
+		if (this.currentProject < this.projects.length - 1) {
+			this.currentProject = this.currentProject + 1 
+		}
+	}
+
+	setProject(project) {
+		this.currentProject = project
+	}
 }
 
 export default new ProjectsStore

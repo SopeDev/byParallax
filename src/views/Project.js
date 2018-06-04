@@ -164,6 +164,7 @@ export default class Project extends React.Component {
 
 	static getDerivedStateFromProps(nextProps, prevState) {
 		const currentProyectIndex = nextProps.ProjectsStore.projects.findIndex((project)=>{ return nextProps.match.params.projectId == project.key })
+		nextProps.ProjectsStore.setProject(currentProyectIndex)
 		const prevProjectIndex = currentProyectIndex == 0 ? nextProps.ProjectsStore.projects.length - 1 : currentProyectIndex - 1
 		const nextProjectIndex = currentProyectIndex == nextProps.ProjectsStore.projects.length - 1 ? 0 : currentProyectIndex + 1
 

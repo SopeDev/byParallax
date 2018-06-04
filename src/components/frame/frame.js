@@ -11,7 +11,7 @@ export default class Frame extends React.Component {
 			<Motion
 				style={{
 					width: spring( width ),
-					height: spring( height ),
+					height: spring( height )
 				}}
 			>
 				{(style) =>

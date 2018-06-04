@@ -1,154 +1,75 @@
 @import 'mixins'
 
-@keyframes in-top
-  from
-  	transform: translateY(-100%)
-  to
-  	transform: translateY(0%)
-@keyframes in-right
-  from
-  	transform: translateX(100%)
-  to
-  	transform: translateX(0%)
-@keyframes in-bottom
-  from
-  	transform: translateY(100%)
-  to
-  	transform: translateY(0%)
-@keyframes in-left
-  from
-  	transform: translateX(-100%)
-  to
-  	transform: translateX(0%)
-
-@keyframes out-top
-  from
-  	transform: translateY(0%)
-  to
-  	transform: translateY(-100%)
-@keyframes out-right
-  from
-  	transform: translateX(0%)
-  to
-  	transform: translateX(100%)
-@keyframes out-bottom
-  from
-  	transform: translateY(0%)
-  to
-  	transform: translateY(100%)
-@keyframes out-left
-  from
-  	transform: translateX(0%)
-  to
-  	transform: translateX(-100%)
-
 .projects
-	position: relative
+	position: absolute
 	display: block
 	width: 100vw
 	height: 100%
-	padding: 100px 10vw
-	background-color: #fff
 	overflow: hidden
-	overflow-y: scroll
-	@include for-tablet-portrait-up
-		padding: 10vh 10vw
-	@include for-desktop-up
-		display: flex
-		align-items: center
-		justify-content: center
-		overflow-y: hidden
-	// &.fade-enter
-	// 	z-index: 100
-	.transitionElement
-		position: fixed
-		background-size: cover
-		background-repeat: no-repeat
+	.nav-dots
+		position: absolute
+		width: 100vw
+		bottom: 1.5em
+		left: 0
+		text-align: center
+		z-index: 10
+		opacity: 1
+		transition: opacity 500ms ease
+	.nav-dot
+		display: inline-block
+		width: 10px
+		height: 10px
+		margin: 0 10px
+		background-color: #000
+		border-radius: 100%
+		transition: background-color 250ms ease
+		cursor: pointer
+		pointer-events: all
+		&.current
+			background-color: #AAA
+	.swipeable-left, .swipeable-right
+		display: inline-block
+		width: 20px
+		height: 20px
+		margin: 0 15px
+		transition: all 250ms ease
+		opacity: 0
+		&.show
+			opacity: 1
+			margin: 0 30px
+			cursor: pointer
+			pointer-events: all
 	.tile-board
-		position: relative
-		display: flex
-		flex-flow: row wrap
-		align-content: center
+		position: absolute
+		width: 100%
+		height: 100% 
+		border-color: #FFF 
+		border-style: solid 
+		overflow: hidden
 		a
+			position: absolute
 			width: 100%
-			@include for-tablet-portrait-up
-				width: 50%
-			@include for-desktop-up
-				width: unset
+			height: 100% 
+			transition: transform 500ms ease
+			&.current ~ a
+				transform: translateX(100vw)
 			.tile
 				position: relative
 				width: 100%
-				height: 80vw
+				height: 100%
 				background-size: cover
 				background-position: center
 				background-repeat: no-repeat
 				overflow: hidden
-				@include for-tablet-portrait-up
-					width: 40vw
-					height: 40vw
-				@include for-desktop-up
-					width: 20vw
-					height: 20vw
-				.tile-info
-					position: absolute
-					display: flex
-					align-items: center
-					justify-content: center
-					bottom: -20vw
-					width: 100%
-					height: 20vw
-					padding: 10%
-					pointer-events: none
-					@include for-desktop-up
-						bottom: unset
-						height: 100%
-						transform: translateY(-100%)
-						animation-duration: 250ms
-						animation-timing-function: ease
-						animation-fill-mode: forwards
-					.tile-title
-						color: #fff
-						font-family: 'FuturaMedium'
-						font-size: 1em
-						letter-spacing: .3rem
-						text-align: center
-						text-transform: uppercase
-					.tile-subtitle
-						color: #333
-						font-size: 14px
-				&.in-top
-					.tile-info
-						animation-name: in-top
-				&.in-right
-					.tile-info
-						animation-name: in-right
-				&.in-bottom
-					.tile-info
-						animation-name: in-bottom
-				&.in-left
-					.tile-info
-						animation-name: in-left
-				&.out-top
-					.tile-info
-						animation-name: out-top
-				&.out-right
-					.tile-info
-						animation-name: out-right
-				&.out-bottom
-					.tile-info
-						animation-name: out-bottom
-				&.out-left
-					.tile-info
-						animation-name: out-left
 	&.fade-enter
-		.tile-board
-			a
-				transform: scale(0)
+		opacity: 0
+		z-index: 1
+		.nav-dots
+			opacity: 0 
 	&.fade-enter.fade-enter-active
-		.tile-board
-			a
-				transform: scale(1)
-				transition: transform 750ms ease
-				&:nth-child(even)
-					transition: transform 650ms ease
-					transition-delay: 100ms
+		opacity: 1
+		transition: opacity 1000ms ease
+	&.fade-exit
+		.nav-dots
+			opacity: 0 
+

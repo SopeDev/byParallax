@@ -43,6 +43,8 @@ export default class Project extends React.Component {
 			this.setState({
 				currentModule: currentModule
 			})
+		} else if (currentModule == -1) {
+			this.props.history.push("/byParallax/projects/")
 		}
 	}
 
@@ -164,16 +166,24 @@ export default class Project extends React.Component {
 		)
 	}
 
+	shouldComponentUpdate(nextProps, nextState) {
+		return this.state.currentModule != nextState.currentModule
+	}
+
 	static getDerivedStateFromProps(nextProps, prevState) {
 		const currentProyectIndex = nextProps.ProjectsStore.projects.findIndex((project)=>{ return nextProps.match.params.projectId == project.key })
 		nextProps.ProjectsStore.setProject(currentProyectIndex)
 		const prevProjectIndex = currentProyectIndex == 0 ? nextProps.ProjectsStore.projects.length - 1 : currentProyectIndex - 1
 		const nextProjectIndex = currentProyectIndex == nextProps.ProjectsStore.projects.length - 1 ? 0 : currentProyectIndex + 1
 
-		return {
-			project: nextProps.ProjectsStore.projects[currentProyectIndex],
-			prevProject: prevProjectIndex,
-			nextProject: nextProjectIndex
+		if (prevState.project != nextProps.ProjectsStore.projects[currentProyectIndex]) {
+			return {
+				project: nextProps.ProjectsStore.projects[currentProyectIndex],
+				prevProject: prevProjectIndex,
+				nextProject: nextProjectIndex
+			}
+		} else {
+			return null
 		}
 	}
 }

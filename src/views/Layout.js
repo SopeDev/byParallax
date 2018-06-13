@@ -215,18 +215,32 @@ export default withRouter(
 		}
 
 		static getDerivedStateFromProps(nextProps, prevState) {
-			if (prevState.currentRoute == "/byParallax/") {
-				ProjectsStore.setProject(0)
-			} else if (prevState.currentRoute == "/byParallax/contact/") {
-				ProjectsStore.setProject(ProjectsStore.projects.length - 1)
-			}
-			return {
-				currentRoute: nextProps.location.pathname
+			if (prevState.currentRoute != nextProps.location.pathname) {
+				return {
+					currentRoute: nextProps.location.pathname
+				}
+			} else {
+				return null
 			}
 		}
 
 		shouldComponentUpdate(nextProps, nextState) {
 			return this.state.loading || this.props.location.key != nextProps.location.key || (this.state.scrollValue != nextState.scrollValue && this.state.currentRoute == "/byParallax/")
+		}
+
+		componentDidUpdate(prevProps, prevState) {
+			if (prevState.currentRoute == "/byParallax/") {
+				ProjectsStore.setProject(0)
+			} else if (prevState.currentRoute == "/byParallax/contact/") {
+				ProjectsStore.setProject(ProjectsStore.projects.length - 1)
+			}
+
+			if (prevProps.location.pathname.match(/\/byParallax\/projects\/[a-z0-9]{1,}\//)) {
+				this.setState({ routing: true })
+				setTimeout(() => {
+					this.setState({ routing: false })
+				}, 1000)
+			}
 		}
 	}
 )

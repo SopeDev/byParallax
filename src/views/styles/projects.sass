@@ -76,6 +76,16 @@
 		z-index: 1
 		.nav-dots
 			opacity: 0 
+		+ .project.fade-exit
+			border-width: 0vh 0vw
+			z-index: 2
+			.scroll
+				opacity: 1
+		+ .project.fade-exit.fade-exit-active
+			border-width: 10vh 10vw		
+			.scroll
+				opacity: 0
+				transition: opacity 500ms ease
 	&.fade-enter.fade-enter-active
 		opacity: 1
 		transition: opacity 1000ms ease

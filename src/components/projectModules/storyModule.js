@@ -47,6 +47,7 @@ export default class StoryModule extends React.Component {
 	render() {
 		const { currentSlide } = this.state
 		const { data, currentModule } = this.props
+		let navDots = null
 
 		const slides = data.slides.map((slide, i)=>{
 			const currentClass = i == currentSlide ? " current" : ""
@@ -82,10 +83,12 @@ export default class StoryModule extends React.Component {
 			)
 		})
 
-		const navDots = data.slides.map((slide, i)=>{
-			const currentClass = i == currentSlide ? " current" : ""
-			return <div key={data.key + "dot" + i} className={"nav-dot" + currentClass} onClick={()=>{this._setSlide(i)}}></div>
-		})
+		if (slides.length > 1) {
+			navDots = data.slides.map((slide, i)=>{
+				const currentClass = i == currentSlide ? " current" : ""
+				return <div key={data.key + "dot" + i} className={"nav-dot" + currentClass} onClick={()=>{this._setSlide(i)}}></div>
+			})
+		}
 
 		const firstArrowClass = currentSlide == 0 ? " hide" : ""
 		const lastArrowClass = currentSlide == data.slides.length - 1 ? " hide" : ""
@@ -130,7 +133,7 @@ export default class StoryModule extends React.Component {
 									<polyline fill="none" stroke="#fff" strokeWidth="1" points="5,0 0,5 5,10"></polyline>
 								</svg>
 							</div>
-							{navDots}
+							{ navDots || null}
 							<div className={"swipeable-right " + rightSwiperClass} onClick={this._nextSlide}>
 								<svg width="5px" height="10px">
 									<polyline fill="none" stroke="#fff" strokeWidth="1" points="0,0 5,5 0,10"></polyline>

@@ -15,7 +15,6 @@ export default class InitAnimation extends React.Component {
 		logo.map((logo)=>{ images.push(logo) })
 		menu.map((menu)=>{ images.push(menu) })
 		slides.map((slide)=>{ images.push(slide) })
-		thumbnails.map((thumbnail)=>{ images.push(thumbnail) })
 		covers.map((cover)=>{ images.push(cover) })
 		contact.map((contact)=>{ images.push(contact) })
 		

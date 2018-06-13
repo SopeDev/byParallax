@@ -47,8 +47,10 @@ export default class Project extends React.Component {
 	}
 
 	_scrollViewThrottle(deltaY, currentTarget) {
-		const currentModule = deltaY > 0 ? this.state.currentModule + 1 : this.state.currentModule - 1
-		this._manageCurrentModule(currentModule)
+		if (deltaY != 0) {
+			const currentModule = deltaY > 0 ? this.state.currentModule + 1 : this.state.currentModule - 1
+			this._manageCurrentModule(currentModule)
+		}
 	}
 
 	_handleSwipeUp() {
@@ -111,7 +113,7 @@ export default class Project extends React.Component {
 								<line fill="none" stroke="#fff" strokeWidth="0.2835" x1="0" y1="1.1" x2="14" y2="1.1"></line>
 							</svg>
 						</Link>
-						<div className="cover" style={{ backgroundColor: ProjectsStore.projects[prevProject].tile.backgroundColor }}></div>
+						<div className="cover" style={{ backgroundColor: ProjectsStore.projects[prevProject].tile }}></div>
 						<div className="project-background" style={{
 							backgroundImage: `url(${ProjectsStore.projects[prevProject].modules[0].background})`,
 							backgroundPosition: `${ProjectsStore.projects[prevProject].modules[0].endingPosition}%`
@@ -127,7 +129,7 @@ export default class Project extends React.Component {
 								<polyline fill="none" stroke="#fff" strokeWidth="0.2835" points="13.1,0.1 14.2,1.1 13.1,2.2 "></polyline>
 							</svg>
 						</Link>
-						<div className="cover" style={{ backgroundColor: ProjectsStore.projects[nextProject].tile.backgroundColor }}></div>
+						<div className="cover" style={{ backgroundColor: ProjectsStore.projects[nextProject].tile }}></div>
 						<div className="project-background" style={{
 							backgroundImage: `url(${ProjectsStore.projects[nextProject].modules[0].background})`,
 							backgroundPosition: `${ProjectsStore.projects[nextProject].modules[0].endingPosition}%`

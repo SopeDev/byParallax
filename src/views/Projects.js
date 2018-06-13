@@ -25,17 +25,14 @@ export default class Projects extends React.Component {
 
 	_nextProject() {
 		this.props.ProjectsStore.nextProject()
-		console.log(this.props.ProjectsStore.currentProject)
 	}
 
 	_prevProject() {
 		this.props.ProjectsStore.prevProject()
-		console.log(this.props.ProjectsStore.currentProject)
 	}
 
 	_setProject(project) {
 		this.props.ProjectsStore.setProject(project)
-		console.log(this.props.ProjectsStore.currentProject)
 	}
 
 	render() {
@@ -75,6 +72,7 @@ export default class Projects extends React.Component {
 							{ProjectsStore.projects.map((project, i) =>
 								<Link key={project.key} to={"./" + project.key + "/"} className={ i == ProjectsStore.currentProject ? "current" : ""}>
 									<div
+										id={project.key}
 										className="tile"
 										style={{
 											backgroundImage: `url(${project.modules[0].background})`
